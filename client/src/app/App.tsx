@@ -1,10 +1,12 @@
 import React from 'react';
+import {Outlet} from "react-router-dom";
 import {HSize, Typo} from "@/shared/ui/Typo";
 
 export const App = () => {
     return (
-        <div>
-            <Typo.H size={HSize.h1}>test</Typo.H>
-        </div>
+        <>
+            <Typo.H size={HSize.h4}>Navbar</Typo.H>
+            <Outlet/>
+        </>
     );
 };

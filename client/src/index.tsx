@@ -1,8 +1,9 @@
 import {createRoot} from "react-dom/client";
-import {App} from "@/app";
-import React from "react";
+import React, {StrictMode} from "react";
 import {Provider} from "react-redux";
 import {store} from "@/shared/store/store";
+import {RouterProvider} from "react-router-dom";
+import {router} from "@/app/router";
 
 const node = document.getElementById('root');
 if (!node) {
@@ -11,8 +12,10 @@ if (!node) {
 
 createRoot(node)
     .render(
-        <Provider store={store}>
-            <App/>
+        <StrictMode>
+            <Provider store={store}>
+                <RouterProvider router={router} />
             </Provider>
+        </StrictMode>
     )
 

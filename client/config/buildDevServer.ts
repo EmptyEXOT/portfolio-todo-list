@@ -4,7 +4,9 @@ import BuildEnv = Webpack.BuildEnv;
 
 export const buildDevServer = ({port}: BuildEnv): DevServerConfiguration => {
     return {
+        hot: true,
         port: port || 3000,
-        open: true,
+        historyApiFallback: true,
+        open: true
     }
 }

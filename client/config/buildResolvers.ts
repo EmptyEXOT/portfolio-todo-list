@@ -1,10 +1,14 @@
 import webpack from "webpack";
 import {Webpack} from "./types";
 import Paths = Webpack.Paths;
+import path from "path";
 
-export const buildResolvers = ({alias}: Paths): webpack.ResolveOptions => {
+export const buildResolvers = ({src, alias}: Paths): webpack.ResolveOptions => {
     return {
         extensions: ['.ts', '.tsx', '.js'],
-        alias: {'@': alias}
+        preferAbsolute: true,
+        modules: [src, 'node_modules'],
+        mainFiles: ['index'],
+        alias: {'@': alias.src}
     }
 }

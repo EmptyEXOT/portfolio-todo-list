@@ -12,7 +12,7 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 
 const Button: FC<ButtonProps> = ({children, className, border, fill, disabled, ...props}) => {
     return (
-        <button onClick={() => {console.log('press')}} disabled={disabled} {...props}
+        <button disabled={disabled} {...props}
                 className={classNames(cls.button, className, border
                         ? 'border-black rounded border-solid' : '',
                     fill

@@ -1,15 +1,10 @@
-import path from "path";
-import HtmlWebpackPlugin from "html-webpack-plugin";
-import {CleanWebpackPlugin} from "clean-webpack-plugin";
-import MiniCssExtractPlugin from "mini-css-extract-plugin";
 import {Webpack} from "./types";
-import webpack = require("webpack");
-import Props = Webpack.Props;
-import {Configuration as DevServerConfiguration} from "webpack-dev-server";
 import {buildPlugins} from "./buildPlugins";
 import {buildModules} from "./buildModules";
 import {buildResolvers} from "./buildResolvers";
 import {buildDevServer} from "./buildDevServer";
+import webpack from "webpack";
+import Props = Webpack.Props;
 
 
 export function buildWebpackConfig(props: Props): webpack.Configuration {
@@ -17,7 +12,8 @@ export function buildWebpackConfig(props: Props): webpack.Configuration {
         entry: props.paths.entry,
         output: {
             filename: '[name].[contenthash].js',
-            path: props.paths.output
+            path: props.paths.output,
+            clean: true
         },
         mode: props.buildEnv.mode,
         plugins: buildPlugins(props),

@@ -1,5 +1,4 @@
 import webpack from "webpack";
-import path from "path";
 
 export namespace Webpack {
     export interface BuildEnv {
@@ -11,7 +10,11 @@ export namespace Webpack {
         entry: string,
         output: string,
         html: string,
-        alias: string,
+        src: string,
+        alias: {
+            src: string,
+            public: string,
+        }
     }
 
     export interface Props {

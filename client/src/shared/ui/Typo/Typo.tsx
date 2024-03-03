@@ -1,58 +1,53 @@
-import React, {FC, ReactNode} from 'react';
-import cls from './Typo.module.scss'
-import classNames from "classnames";
+import React, {FC, ReactElement, ReactNode} from 'react';
+import "./Typo.scss"
+import {H1, H2, H3, H4, H5, H6, HxComponent} from "@/shared/ui/Typo/Header/H";
+import P, {PComponent} from "@/shared/ui/Typo/Paragraph/P";
+
+export enum TypoVariant {
+    Primary = 'typo-color-primary',
+    Secondary = 'typo-color-secondary',
+    Alert = 'typo-color-alert',
+    Warning = 'typo-color-warning',
+    Successful = 'typo-color-successful',
+    Light = 'typo-color-light'
+}
 
 export interface TypoProps {
-    children: ReactNode;
-    fontFamily?: string;
+    children: ReactNode
+    className?: string | undefined;
+    variant?: TypoVariant,
+    bold?: boolean,
+    italics?: boolean,
+    underline?: boolean,
 }
 
-export enum HSize {
-    h1 = 'h1',
-    h2 = 'h2',
-    h3 = 'h3',
-    h4 = 'h4',
-    h5 = 'h5',
-    h6 = 'h6',
-}
-
-interface PProps extends TypoProps {
-}
-interface HProps extends TypoProps {
-    size: HSize
-}
-
-type TypoComponent = FC<TypoProps> & {
+export type TypoComponent = FC<TypoProps> & {
+    H1: HxComponent,
+    H2: HxComponent,
+    H3: HxComponent,
+    H4: HxComponent,
+    H5: HxComponent,
+    H6: HxComponent,
     P: PComponent,
-    H: HComponent,
-}
-type PComponent = FC<PProps>
-type HComponent = FC<HProps>
+};
 
-export const Typo: TypoComponent = () => {
+export const Typo: TypoComponent = (
+    {
+        children,
+        variant,
+        ...props
+    }
+): ReactElement => {
     return (
-        <>
-
-        </>
+        <></>
     );
 };
 
-const P: PComponent = ({children, ...props}) => {
-    return (
-      <p className={classNames(cls.typo)}>
-          {children}
-      </p>
-    );
-}
+Typo.H1 = H1
+Typo.H2 = H2
+Typo.H3 = H3
+Typo.H4 = H4
+Typo.H5 = H5
+Typo.H6 = H6
 
-const H: HComponent = ({children, ...props}) => {
-    return (
-        <props.size className={classNames(cls.typo)} {...props}>
-            {children}
-        </props.size>
-    )
-}
-
-Typo.P = P;
-Typo.H = H;
-
+Typo.P = P

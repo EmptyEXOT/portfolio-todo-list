@@ -1,11 +1,13 @@
-import React from 'react';
+import React, {ReactNode} from 'react';
+import './global.scss'
 import {Outlet} from "react-router-dom";
-import {HSize, Typo} from "@/shared/ui/Typo";
+import {Navbar} from "@/widgets/Navbar";
 
-export const App = () => {
+export const App = ({children}: {children?: ReactNode}) => {
     return (
         <>
-            <Typo.H size={HSize.h4}>Navbar</Typo.H>
+            <Navbar/>
+            {children}
             <Outlet/>
         </>
     );

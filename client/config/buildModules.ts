@@ -1,7 +1,4 @@
 import webpack from "webpack";
-import {Webpack} from "./types";
-import Props = Webpack.Props;
-import MiniCssExtractPlugin from "mini-css-extract-plugin";
 
 export const buildModules = (): webpack.ModuleOptions => {
     const rules: webpack.RuleSetRule[] = [];
@@ -13,21 +10,37 @@ export const buildModules = (): webpack.ModuleOptions => {
     }
 
     const stylesLoader: webpack.RuleSetRule = {
-        test: /\.s[ac]ss$/i,
+        test: /\.s?[ac]ss$/i,
         use: [
-            MiniCssExtractPlugin.loader,
-            {
-                loader: "css-loader",
-                options: {
-                    modules: true
-                }
-            },
-            "sass-loader",
+            "style-loader", "css-loader", "postcss-loader", "sass-loader"
         ],
     }
 
+    const fileLoader = {
+        test: /\.(png|jpe?g|gif|woff|woff2)$/i,
+        use: [
+            {
+                loader: 'file-loader',
+            },
+        ],
+    };
+
+    const svgLoader = {
+        test: /\.svg$/,
+        use: [
+            {
+                loader: '@svgr/webpack',
+                options: {
+                    native: false,
+                },
+            },
+        ],
+        issuer: /\.[jt]sx?$/,
+    }
+
+    rules.push(fileLoader)
+    rules.push(svgLoader)
     rules.push(tsLoader);
     rules.push(stylesLoader);
     return {rules};
-
 }

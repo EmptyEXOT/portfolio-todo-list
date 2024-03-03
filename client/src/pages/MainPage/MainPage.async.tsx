@@ -1,6 +1,8 @@
-import {lazy, ReactNode} from "react";
+import {lazy} from "react";
 
-export const MainPageAsync = lazy<() => ReactNode>(() => import('./MainPage')
-    .then(({MainPage}) =>
-        ({default: MainPage})
-    ));
+export const MainPageAsync = lazy(
+    () => new Promise((res) => {
+        // @ts-ignore
+        setTimeout(() => res(import('./MainPage')), 1000);
+    }),
+)

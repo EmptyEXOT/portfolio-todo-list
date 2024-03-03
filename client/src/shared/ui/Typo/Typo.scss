@@ -1,0 +1,53 @@
+.typo {
+
+}
+
+@layer typo {
+  .typo-color-warning {
+    @apply text-amber-600
+  }
+
+  .typo-color-alert {
+    @apply text-red-800
+  }
+
+  .typo-color-primary {
+    @apply text-black
+  }
+
+  .typo-color-secondary {
+    @apply text-neutral-800
+  }
+
+  .typo-color-successful {
+    @apply text-green-800
+  }
+
+  .typo-color-light {
+    @apply text-white
+  }
+}
+
+h1 {
+  @apply text-4xl sm:text-3xl
+}
+
+h2 {
+  @apply text-3xl sm:text-2xl
+}
+
+h3 {
+  @apply text-2xl sm:text-xl
+}
+
+h4 {
+  @apply text-xl sm:text-lg
+}
+
+h5 {
+  @apply text-lg sm:text-base
+}
+
+h6 {
+  @apply text-base sm:text-sm
+}

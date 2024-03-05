@@ -65,3 +65,7 @@ button {
   -moz-osx-font-smoothing: inherit;
   -webkit-appearance: none;
 }
+
+input, textarea {
+  all: unset;
+}

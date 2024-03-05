@@ -14,7 +14,6 @@ export const Navigation: FC<NavigationProps> = ({className, ...props}) => {
             className={classNames('w-full md:flex gap-4 md:justify-between md:w-full', className)}>
             <NavbarLink><Link to='/'><Typo.H3>Main</Typo.H3></Link></NavbarLink>
             <NavbarLink><Link to='about'><Typo.H3>About</Typo.H3></Link></NavbarLink>
-            <NavbarLink><Link to='contact'><Typo.H3>Contact</Typo.H3></Link></NavbarLink>
         </div>
     );
 };

@@ -1,9 +1,10 @@
 import {createBrowserRouter} from "react-router-dom";
-import {App} from "@/app";
+import {Root} from "@/root";
 import {Suspense} from "react";
 import {MainPage} from "@/pages/MainPage";
 import {AboutPage} from "@/pages/AboutPage";
 import {ErrorPage} from "@/pages/ErrorPage";
+import {AppPage} from "@/pages/AppPage";
 
 export const router = createBrowserRouter([
     {
@@ -12,7 +13,7 @@ export const router = createBrowserRouter([
             <Suspense fallback={'error page loading...'}>
                 <ErrorPage />
             </Suspense>,
-        element: <App />,
+        element: <Root />,
         children: [
             {
                 index: true,
@@ -30,4 +31,11 @@ export const router = createBrowserRouter([
             }
         ]
     },
+    {
+        path: 'app',
+        element:
+        <Suspense fallback={'loading root...'}>
+            <AppPage />
+        </Suspense>
+    }
 ])

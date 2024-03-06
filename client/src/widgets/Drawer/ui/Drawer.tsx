@@ -3,7 +3,7 @@ import classNames from "classnames";
 import {Typo} from "@/shared/ui/Typo/Typo";
 import NotificationIcon from './assets/Notification.svg'
 import MenuOpenIcon from './assets/MenuOpen.svg'
-import Button from "@/shared/ui/Button/Button";
+import Button, {ButtonVariant} from "@/shared/ui/Button/Button";
 import AddCircleIcon from './assets/AddCircle.svg';
 import {Modal} from "@/shared/ui/Modal/Modal";
 import {ModalProvider} from "@/shared/ui/Modal/ModalProvider";
@@ -31,7 +31,7 @@ export const Drawer: FC<DrawerProps> = (
                     'w-[70%] rounded-xl flex flex-col bg-neutral-200 p-4 shadow-sm shadow-neutral-200',
                     props.className
                 )}>
-                <AddTodo/>
+                <AddTodo setIsModalOpen={setIsModalOpen}/>
             </Modal>
             <div
                 className={classNames('transition-all duration-300', isDrawerOpen ? 'top-0 bottom-0 bg-black opacity-30 w-screen absolute md:hidden' : 'bg-black opacity-0')}
@@ -42,6 +42,8 @@ export const Drawer: FC<DrawerProps> = (
                 }}>
             </div>
             <Button
+                modifiers={{circle: true}}
+                variant={ButtonVariant.Default}
                 onClick={() => setIsDrawerOpen(prevState => !prevState)}
                 className={classNames('p-2 absolute transition-all', isDrawerOpen ? 'left-[75vw] md:left-[23.5vw]' : 'left-[0]')}
             >
@@ -56,6 +58,8 @@ export const Drawer: FC<DrawerProps> = (
                 <div id={'controls'} className={classNames('flex justify-between items-center')}>
                     <Typo.H3>Username</Typo.H3>
                     <Button
+                        modifiers={{circle: true}}
+                        variant={ButtonVariant.Default}
                         className={classNames('p-2')}
                     >
                         <NotificationIcon/>
@@ -64,6 +68,8 @@ export const Drawer: FC<DrawerProps> = (
                 <div id={'controls'} className={classNames('flex justify-between items-center')}>
                     <Typo.H3>AddTask</Typo.H3>
                     <Button
+                        modifiers={{circle: true}}
+                        variant={ButtonVariant.Default}
                         // onClick={() => dispatch(todoActions.addTask({created: '', description: 'new task', header: 'New tas Header', isFinished: false, deadline: ''}))}
                         onClick={() => setIsModalOpen(true)}
                         className={classNames('p-2')}

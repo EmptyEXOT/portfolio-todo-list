@@ -1,8 +1,8 @@
-import React, {createContext, FC, ReactNode, useContext, useState} from 'react';
+import React, {createContext, FC, ReactNode, useState} from 'react';
 import classNames from "classnames";
 import cls from "./Navbar.module.scss"
 import Menu from "@/widgets/Navbar/ui/Menu/Menu";
-import Button from "@/shared/ui/Button/Button";
+import Button, {ButtonVariant} from "@/shared/ui/Button/Button";
 import Burger from "@/shared/ui/Burger/Burger";
 import {Typo, TypoVariant} from '@/shared/ui/Typo/Typo';
 import {Link} from "react-router-dom";
@@ -48,7 +48,7 @@ export const Navbar: FC<HeaderProps> = (
                             <Typo.H3 className={classNames('text-nowrap')} variant={TypoVariant.Light}>Sign Up</Typo.H3>
                         </Link>
                         <Button onClick={() => setIsExtended(prevState => !prevState)}
-                                border={false}
+                                variant={ButtonVariant.Default}
                                 className={classNames('pe-0 md:hidden')}>
                             <Burger isOpen={isExtended}/>
                         </Button>

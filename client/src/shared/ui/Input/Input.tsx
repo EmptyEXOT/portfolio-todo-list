@@ -1,4 +1,4 @@
-import React, {FC, InputHTMLAttributes, ReactNode} from 'react';
+import React, {FC, forwardRef, InputHTMLAttributes, ReactNode, useEffect, useRef, useState} from 'react';
 import classNames from "classnames";
 import cls from "./Input.module.scss"
 
@@ -9,9 +9,12 @@ interface InputProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 'value'
     label?: string | ReactNode,
     autofocus?: boolean,
     onChange?: (value: string) => void,
+    onReset?: () => void,
     placeholder?: string,
     type?: string,
 }
+
+type InputRef = HTMLInputElement
 
 const Input: FC<InputProps> = (
     {
@@ -23,9 +26,11 @@ const Input: FC<InputProps> = (
         placeholder = '',
         type = 'text',
         className,
+        onReset,
         ...props
     }
 ) => {
+    const [isFocused, setFocus] = useState<boolean>(autofocus)
     const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
         onChange?.(e.target.value)
     }
@@ -34,6 +39,7 @@ const Input: FC<InputProps> = (
         <div className={classNames('flex flex-col gap-2')}>
             {label && <label htmlFor={props.id}>{label}</label>}
             <input
+                autoFocus={autofocus}
                 id={props.id}
                 className={classNames('border border-neutral-400 rounded-md px-2', className)}
                 value={value}

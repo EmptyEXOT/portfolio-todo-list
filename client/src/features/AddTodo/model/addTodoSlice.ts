@@ -18,6 +18,10 @@ const addTodoSlice = createSlice({
         },
         setDescription: (state, action: PayloadAction<string>) => {
             state.description = action.payload
+        },
+        reset: (state) => {
+            state.description = '';
+            state.header = '';
         }
     }
 })

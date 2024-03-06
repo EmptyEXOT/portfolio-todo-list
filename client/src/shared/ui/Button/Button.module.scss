@@ -1,3 +1,112 @@
+
+$button-color-warning: orange;
+$button-color-alert: red;
+$button-color-success: green;
+$button-color-default: none;
+$button-shadow-spread: 7px;
+
+.rounded {
+  border-radius: 6px;
+}
+
+.circle {
+  border-radius: 100%;
+}
+
 .button {
   cursor: pointer;
+}
+
+.button:focus-visible {
+  -webkit-box-shadow: 0 0 $button-shadow-spread -3px black;
+  -moz-box-shadow: 0 0 $button-shadow-spread -3px black;
+  box-shadow: 0 0 $button-shadow-spread -3px black;
+  border: none;
+  outline: none;
+}
+
+// Warning styles
+
+.warning {
+  color: $button-color-warning;
+}
+
+.warning.border {
+  border: solid 2px $button-color-warning;
+  color: white;
+}
+
+.warning.filled {
+  background-color: $button-color-warning;
+}
+
+.warning:hover {
+  -webkit-box-shadow: 0 0 $button-shadow-spread -3px $button-color-warning;
+  -moz-box-shadow: 0 0 $button-shadow-spread -3px $button-color-warning;
+  box-shadow: 0 0 $button-shadow-spread -3px $button-color-warning;
+}
+
+// Success styles
+
+.success {
+  color: $button-color-success;
+}
+
+.success.filled {
+  background-color: $button-color-success;
+  color: white
+}
+
+.success.border {
+  border: solid 2px $button-color-success;
+}
+
+.success:hover {
+  -webkit-box-shadow: 0 0 $button-shadow-spread -3px $button-color-success;
+  -moz-box-shadow: 0 0 $button-shadow-spread -3px $button-color-success;
+  box-shadow: 0 0 $button-shadow-spread -3px $button-color-success;
+}
+
+// Success styles
+
+.default {
+  color: $button-color-default;
+}
+
+.default.filled {
+  background-color: $button-color-default;
+}
+
+.default.border {
+  border: solid 2px $button-color-default;
+}
+
+.default:hover {
+  -webkit-box-shadow: 0 0 $button-shadow-spread -3px black;
+  -moz-box-shadow: 0 0 $button-shadow-spread -3px black;
+  box-shadow: 0 0 $button-shadow-spread -3px black;
+}
+
+// Alert styles
+
+.alert {
+  color: $button-color-alert;
+}
+
+.alert.filled {
+  background-color: $button-color-alert;
+}
+
+.alert.border {
+  border: solid 2px $button-color-alert;
+}
+
+.alert:hover {
+  -webkit-box-shadow: 0 0 $button-shadow-spread -3px $button-color-alert;
+  -moz-box-shadow: 0 0 $button-shadow-spread -3px $button-color-alert;
+  box-shadow: 0 0 $button-shadow-spread -3px $button-color-alert;
+}
+
+@function setColor($color) {
+
 }

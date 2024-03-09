@@ -1,13 +1,34 @@
-import {configureStore} from '@reduxjs/toolkit'
+import {configureStore, ReducersMapObject} from '@reduxjs/toolkit'
 import {todoReducer} from "@/entities/Todo/model/todoSlice";
+import {StateSchema} from "./types";
 import {addTodoReducer} from "@/features/AddTodo/model/addTodoSlice";
+import {$api} from "@/shared/api/api";
+import {AxiosInstance} from "axios";
 
-export const store = configureStore({
-    reducer: {
-        todoReducer,
-        addTodoReducer
-    },
-})
+export const createReduxStore = (initialState?: StateSchema) => {
+    const rootReducer: ReducersMapObject<StateSchema> = {
+        todos: todoReducer,
+        newTodo: addTodoReducer,
+    }
 
-export type RootState = ReturnType<typeof store.getState>
-export type AppDispatch = typeof store.dispatch
+    return configureStore({
+        reducer: rootReducer,
+        preloadedState: initialState,
+        middleware: getDefaultMiddleware => getDefaultMiddleware({
+            thunk: {
+                extraArgument: {
+                    api: $api
+                }
+            }
+        })
+    })
+}
+
+export interface ThunkExtraArgs {
+    api: AxiosInstance,
+}
+
+export interface ThunkConfig<T> {
+    rejectValue: T,
+    extra: ThunkExtraArgs
+}

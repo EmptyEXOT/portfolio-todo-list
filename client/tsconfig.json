@@ -9,7 +9,6 @@
     "noImplicitAny": true,
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
-    "strict": true,
     "plugins": [{
       "name": "typescript-plugin-css-modules"
     }],

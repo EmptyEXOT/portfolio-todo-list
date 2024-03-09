@@ -39,7 +39,47 @@ server.post('/login', (req, res) => {
     }
 });
 
-// eslint-disable-next-line
+server.get((req, res) => {
+    try {
+        const db = JSON.parse(
+            fs.readFileSync(path.resolve(__dirname, 'db.json'), 'UTF-8'),
+        );
+
+        const todos = db.todos;
+        return res.json(todos);
+    } catch (e) {
+        console.log(e);
+        return res.status(500).json({ message: e.message });
+    }
+})
+
+server.post('/todos', (req, res) => {
+    try {
+        const todo = req.body
+        const db = JSON.parse(
+            fs.readFileSync(path.resolve(__dirname, 'db.json'), 'UTF-8'),
+        );
+
+        const newTodoId = db.todos.length;
+
+        const newTodo = {
+            id: newTodoId,
+            title: todo.title,
+            description: todo.description,
+            author: 'alim'
+        }
+
+        db.todos.push(newTodo)
+
+        fs.writeFileSync(path.resolve(__dirname, 'db.json'), JSON.stringify(db, undefined, 2))
+        return res.json(todo);
+    } catch (e) {
+        console.log(e);
+        return res.status(500).json({message: e.message})
+    }
+})
+
+//eslint-disable-next-line
 server.use((req, res, next) => {
     if (!req.headers.authorization) {
         return res.status(403).json({ message: 'AUTH ERROR' });

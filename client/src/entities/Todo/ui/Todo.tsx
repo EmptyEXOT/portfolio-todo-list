@@ -11,7 +11,7 @@ export interface TodoProps {
 const Todo: FC<TodoProps> = ({children, className, todoInfo, idx}) => {
     return (
         <div>
-            <div>{idx}: {todoInfo.header}</div>
+            <div>{idx}: {todoInfo.title}</div>
             <div>{todoInfo.description}</div>
         </div>
     );

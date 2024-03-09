@@ -1,7 +1,19 @@
+import {EntityState} from "@reduxjs/toolkit";
+
+export interface TodoListSchema extends EntityState<TodoModel, number> {
+    error: TodoListError | null,
+    isLoading: boolean,
+    
+}
+
 export interface TodoModel {
-    created: string,
-    deadline: string,
+    id: number,
     isFinished: boolean,
-    header: string,
+    title: string,
     description: string,
+}
+
+export interface TodoListError {
+    statusCode: number,
+    message: string,
 }

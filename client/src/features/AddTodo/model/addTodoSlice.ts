@@ -1,12 +1,13 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
-import {TodoModel} from "@/entities/Todo/model/types";
+import {addTodoService} from "@/features/AddTodo/services/addTodoService";
+import {AddTodoModel} from "@/features/AddTodo/model/types";
 
-const initialState: TodoModel = {
-    header: '',
-    created: '',
-    isFinished: false,
-    deadline: '',
-    description: ''
+const initialState: AddTodoModel = {
+    id: 0,
+    title: '',
+    description: '',
+    errors: null,
+    isLoading: false,
 }
 
 const addTodoSlice = createSlice({
@@ -14,15 +15,31 @@ const addTodoSlice = createSlice({
     initialState,
     reducers: {
         setHeader: (state, action: PayloadAction<string>) => {
-            state.header = action.payload
+            state.title = action.payload
         },
         setDescription: (state, action: PayloadAction<string>) => {
             state.description = action.payload
         },
         reset: (state) => {
             state.description = '';
-            state.header = '';
+            state.title = '';
         }
+    },
+    extraReducers: (builder) => {
+        builder
+            .addCase(addTodoService.pending, (state, action) => {
+                state.errors = null;
+                state.isLoading = true;
+            })
+            .addCase(addTodoService.fulfilled, (state, action) => {
+                state.isLoading = false;
+                state.title = '';
+                state.description = ''
+            })
+            .addCase(addTodoService.rejected, (state, action) => {
+                //@ts-ignore
+                state.errors = action.payload
+            })
     }
 })
 

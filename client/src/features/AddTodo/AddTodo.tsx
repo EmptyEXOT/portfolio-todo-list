@@ -1,13 +1,12 @@
-import React, {FC, ReactNode, useCallback, useContext, useRef} from 'react';
+import React, {FC, ReactNode, useCallback} from 'react';
 import classNames from "classnames";
 import Button, {ButtonVariant} from "@/shared/ui/Button/Button";
 import {Typo, TypoVariant} from "@/shared/ui/Typo/Typo";
-import {useAppDispatch, useAppSelector} from "@/shared/store/hooks";
-import {todoActions} from "@/entities/Todo/model/todoSlice";
 import {addTodoActions} from "@/features/AddTodo/model/addTodoSlice";
 import Input from "@/shared/ui/Input/Input";
-import {selectAddTodo} from "@/features/AddTodo/model/selectors";
-import {ModalContext} from "@/shared/ui/Modal/ModalContext";
+import {addTodoService} from "@/features/AddTodo/services/addTodoService";
+import {useDispatch, useSelector} from "react-redux";
+import {StateSchema} from "@/shared/store/types";
 
 interface AddTodoProps {
     children?: ReactNode
@@ -26,8 +25,8 @@ const AddTodo: FC<AddTodoProps> = (
     // const headerInputRef = useRef<HTMLInputElement>(null)
     // const descriptionInputRef = useRef<HTMLInputElement>(null)
 
-    const dispatch = useAppDispatch()
-    const newTodo = useAppSelector(selectAddTodo);
+    const dispatch = useDispatch<any>()
+    const newTodo = useSelector((state: StateSchema) => state.newTodo);
     const onHeaderChange = (value: string) => {
         dispatch(addTodoActions.setHeader(value));
     }
@@ -42,23 +41,18 @@ const AddTodo: FC<AddTodoProps> = (
     }, [])
 
     const onAdd = useCallback(() => {
-        dispatch(todoActions.addTask({
-            deadline: '',
-            isFinished: false,
-            created: '',
-            description: newTodo.description,
-            header: newTodo.header
-        }))
+        dispatch(addTodoService({title: newTodo.title, description: newTodo.description}))
+
         dispatch(addTodoActions.reset())
         setIsModalOpen(false);
-    }, [newTodo])
+    }, [newTodo.title, newTodo.description])
 
     return (
         <div className={classNames('flex flex-col gap-2 ')}>
             <Input
                 autoFocus={true}
                 // ref={headerInputRef}
-                value={newTodo.header}
+                value={newTodo.title}
                 onChange={onHeaderChange}
                 placeholder={'Task Name'}
                 className={classNames('bg-inherit placeholder:text-neutral-600 resize-none')}/>

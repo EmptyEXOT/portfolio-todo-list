@@ -1,10 +1,10 @@
-import React, {FC, ReactNode} from 'react';
+import React, {FC, ReactNode, useEffect} from 'react';
 import classNames from "classnames";
-import cls from "./App.module.scss"
+import {useDispatch, useSelector} from "react-redux";
+import {StateSchema} from "@/shared/store/types";
 import Todo from "@/entities/Todo/ui/Todo";
-import {useAppDispatch, useAppSelector} from "@/shared/store/hooks";
-import {selectTodo} from "@/entities/Todo/model/selectors";
-import {Modal} from "@/shared/ui/Modal/Modal";
+import {getTodos} from "@/entities/Todo/model/todoSlice";
+import {fetchAllTodosService} from "@/entities/Todo/services/fetchAllTodosService";
 
 interface AppProps {
     children?: ReactNode
@@ -17,10 +17,17 @@ const App: FC<AppProps> = (
         ...props
     }
 ) => {
-    const dispatch = useAppDispatch()
-    const todos = useAppSelector(selectTodo);
+    const dispatch = useDispatch<any>()
+    const todos = useSelector(getTodos.selectAll)
+    const isTodosLoading = useSelector((state: StateSchema) => state.todos.isLoading)
+
+    useEffect(() => {
+        dispatch(fetchAllTodosService())
+        console.log(todos)
+    }, []);
 
     return (
+        isTodosLoading ? <p>loading...</p> :
         <div
             className={classNames(
                 'md:w-[85%] w-screen px-2 md:px:0',
@@ -28,7 +35,7 @@ const App: FC<AppProps> = (
             )}
         >
             {todos.map((todo, idx) =>
-                <Todo todoInfo={todo} idx={idx+1} key={idx}/>
+                <Todo todoInfo={todo} idx={idx} key={idx}/>
             )}
         </div>
     );

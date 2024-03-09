@@ -1,10 +1,11 @@
 import {createRoot} from "react-dom/client";
 import React, {StrictMode} from "react";
 import '@/root/global.scss'
-import {Provider} from "react-redux";
-import {store} from "@/shared/store/store";
 import {RouterProvider} from "react-router-dom";
 import {router} from "@/shared/router/router";
+import {createReduxStore} from "@/shared/store/store";
+import {StateSchema} from "@/shared/store/types";
+import {StoreProvider} from "@/shared/store/StoreProvider";
 
 
 const node = document.getElementById('root');
@@ -15,9 +16,9 @@ if (!node) {
 createRoot(node)
     .render(
         <StrictMode>
-            <Provider store={store}>
+            <StoreProvider>
                 <RouterProvider router={router} />
-            </Provider>
+            </StoreProvider>
         </StrictMode>
     )
 

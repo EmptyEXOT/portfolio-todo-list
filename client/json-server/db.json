@@ -1,41 +1,34 @@
 {
   "todos": [
     {
-      "id": 0,
-      "title": "json-server",
-      "description": "default description",
-      "author": "typicode"
-    },
-    {
       "id": 1,
-      "title": "json-server 2",
+      "title": "json-server 1",
       "description": "default description",
       "author": "typicode"
     },
     {
       "id": 2,
-      "title": "json-server 3",
+      "title": "json-server 2",
       "description": "default description",
       "author": "typicode"
     },
     {
       "id": 3,
-      "title": "my-new-todo",
-      "description": "description",
-      "author": "alim"
+      "title": "json-server 3",
+      "description": "default description",
+      "author": "typicode"
     },
     {
       "id": 4,
-      "title": "Test",
-      "description": "descr",
-      "author": "alim"
+      "title": "json-server 4",
+      "description": "default description",
+      "author": "typicode"
     }
   ],
   "comments": [
     {
       "id": 1,
-      "body": "some comment",
-      "postId": 1
+      "body": "some comment"
     }
   ],
   "profile": {

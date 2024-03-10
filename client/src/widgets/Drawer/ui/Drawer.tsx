@@ -22,7 +22,7 @@ export const Drawer: FC<DrawerProps> = (
     }
 ) => {
     const [isDrawerOpen, setIsDrawerOpen] = useState<boolean>(true)
-    const [isModalOpen, setIsModalOpen] = useState<boolean>(true);
+    const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
     return (
         <ModalProvider setIsModalOpen={setIsModalOpen} isModalOpen={isModalOpen}>
             <Modal

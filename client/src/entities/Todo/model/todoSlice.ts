@@ -20,7 +20,6 @@ const todoSlice = createSlice({
         entities: {}
     }),
     reducers: {
-
     },
     extraReducers: (builder) => {
         builder

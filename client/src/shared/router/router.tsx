@@ -10,23 +10,25 @@ export const router = createBrowserRouter([
     {
         path: '/',
         errorElement:
-            <Suspense fallback={'error page loading...'}>
-                <ErrorPage />
-            </Suspense>,
-        element: <Root />,
+            <Root>
+                <Suspense fallback={'error page loading...'}>
+                    <ErrorPage/>
+                </Suspense>
+            </Root>,
+        element: <Root/>,
         children: [
             {
                 index: true,
                 element:
                     <Suspense fallback={'page is loading'}>
-                        <MainPage />
+                        <MainPage/>
                     </Suspense>
             },
             {
                 path: 'about',
                 element:
                     <Suspense fallback={'page is loading'}>
-                        <AboutPage />
+                        <AboutPage/>
                     </Suspense>
             }
         ]
@@ -34,8 +36,8 @@ export const router = createBrowserRouter([
     {
         path: 'app',
         element:
-        <Suspense fallback={'loading root...'}>
-            <AppPage />
-        </Suspense>
+            <Suspense fallback={'loading root...'}>
+                <AppPage/>
+            </Suspense>
     }
 ])

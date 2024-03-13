@@ -18,6 +18,7 @@ type InputRef = HTMLInputElement
 
 const Input: FC<InputProps> = (
     {
+        name,
         children,
         value,
         onChange,
@@ -39,6 +40,7 @@ const Input: FC<InputProps> = (
         <div className={classNames('flex flex-col gap-2')}>
             {label && <label htmlFor={props.id}>{label}</label>}
             <input
+                name={name}
                 autoFocus={autofocus}
                 id={props.id}
                 className={classNames('border border-neutral-400 rounded-md px-2', className)}

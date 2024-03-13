@@ -13,8 +13,10 @@ export const editTodoService = createAsyncThunk<TodoModel, EditTodoPayload, Thun
     'todo/edit',
     async (data, thunkAPI) => {
         try {
+            const token = localStorage.getItem('token');
             const response = await thunkAPI.extra.api.put<TodoModel>(`/todos/${data.id}`,
-                {title: data.title, description: data.description}
+                {title: data.title, description: data.description},
+                {headers: {Authorization: `Bearer ${token}`}}
             )
             if (!response.data) {
                 throw new Error('Login Error')

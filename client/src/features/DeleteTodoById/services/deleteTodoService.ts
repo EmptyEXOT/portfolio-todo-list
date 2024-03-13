@@ -11,7 +11,8 @@ export const deleteTodoService = createAsyncThunk<TodoModel, number, ThunkConfig
     'todo/delete',
     async (id, thunkAPI) => {
         try {
-            const response = await thunkAPI.extra.api.delete<TodoModel>(`/todos/${id}`)
+            const token = localStorage.getItem('token');
+            const response = await thunkAPI.extra.api.delete<TodoModel>(`/todos/${id}`, {headers: {Authorization: `Bearer ${token}`}})
             if (!response.data) {
                 throw new Error('Delete Error')
             } else {

@@ -2,7 +2,7 @@
   "todos": [
     {
       "id": 1,
-      "title": "json-server 1",
+      "title": "json-server 123",
       "description": "default description",
       "author": "typicode"
     },
@@ -20,7 +20,7 @@
     },
     {
       "id": 4,
-      "title": "json-server 4",
+      "title": "json-server 45",
       "description": "default description",
       "author": "typicode"
     }
@@ -38,7 +38,8 @@
     {
       "id": 1,
       "username": "admin",
-      "password": "123"
+      "password": "123",
+      "email": "alim"
     }
   ]
 }

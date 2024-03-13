@@ -6,6 +6,8 @@ import {DatabaseSchema} from "./models/DatabaseSchema";
 import {LoginRequests} from "./requests/LoginRequests";
 import {AddTodoRequest, DeleteTodoRequest, GetTodoRequest, UpdateTodoRequest} from "./requests/TodoRequests";
 import {TodoSchema} from "./models/TodoSchema";
+import {UserSchema} from "./models/UserSchema";
+import {ValidateUserRequest} from "./requests/ValidateUserRequest";
 
 //TODO fix ts error for .create()
 //@ts-ignore
@@ -32,18 +34,18 @@ server.use(async (req: express.Request, res: express.Response, next: express.Nex
 
 server.post('/login', (req: LoginRequests, res: express.Response) => {
     try {
-        const {username, password} = req.body;
+        const {email, password} = req.body;
         const db: DatabaseSchema = JSON.parse(
             fs.readFileSync(path.resolve(__dirname, 'db.json'), {encoding: "utf-8"}),
         );
         const {users = []} = db;
 
-        const userFromBd = users.find(
-            (user) => user.username === username && user.password === password,
+        const userFromBd: UserSchema = users.find(
+            (user) => user.email === email && user.password === password,
         );
 
         if (userFromBd) {
-            return res.json(userFromBd);
+            return res.json(userFromBd)
         }
 
         return res.status(403).json({message: 'User not found'});
@@ -51,6 +53,30 @@ server.post('/login', (req: LoginRequests, res: express.Response) => {
         console.log(e);
         return res.status(500).json({message: e.message});
     }
+});
+
+server.post('/validate', (req: ValidateUserRequest, res: express.Response) => {
+    const {email, token} = req.body
+
+    const db: DatabaseSchema = JSON.parse(
+        fs.readFileSync(path.resolve(__dirname, 'db.json'), {encoding: "utf-8"}),
+    );
+
+    const users: UserSchema[] = db.users;
+    const candidate = users.find(user => user.email === email && String(user.id) === token);
+    if (candidate) {
+        return res.json(true)
+    }
+    res.json(false)
+})
+
+//eslint-disable-next-line
+server.use((req: express.Request, res: express.Response, next: express.NextFunction) => {
+    if (req.headers.authorization.split('Bearer ')[1] === 'null') {
+        return res.status(403).json({message: 'AUTH ERROR'});
+    }
+
+    next();
 });
 
 server.get('/todos', (req: GetTodoRequest, res: express.Response) => {
@@ -140,15 +166,6 @@ server.put('/todos/:id', (req: UpdateTodoRequest, res: express.Response) => {
 
     res.json(candidate);
 })
-
-//eslint-disable-next-line
-server.use((req: express.Request, res: express.Response, next: express.NextFunction) => {
-    if (!req.headers.authorization) {
-        return res.status(403).json({message: 'AUTH ERROR'});
-    }
-
-    next();
-});
 
 server.use(router);
 

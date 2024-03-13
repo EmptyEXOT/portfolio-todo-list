@@ -26,6 +26,10 @@
   .typo-color-light {
     @apply text-white
   }
+
+  .typo-color-link {
+    @apply text-blue-800 underline cursor-pointer
+  }
 }
 
 h1 {

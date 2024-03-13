@@ -7,16 +7,17 @@ type TodosResponse = TodoModel[]
 
 export const fetchAllTodosService = createAsyncThunk<TodosResponse, void, ThunkConfig<TodoListError>>(
     'todo/get',
-    async (_, thunkAPI)=> {
+    async (_, thunkAPI) => {
         try {
-            const response = await thunkAPI.extra.api.get<TodosResponse>('/todos')
+            const token = localStorage.getItem('token');
+            const response = await thunkAPI.extra.api.get<TodosResponse>('/todos', {headers: {Authorization: `Bearer ${token}`}})
             if (!response.data) {
-                throw new Error('Login Error')
+                throw new Error('todos error')
             } else {
                 return response.data
             }
-        } catch (e: any) {
-            return e.message
+        } catch (e) {
+            return thunkAPI.rejectWithValue({message: e.message, statusCode: e.statusCode})
         }
     }
 )

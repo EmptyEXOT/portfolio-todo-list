@@ -5,12 +5,14 @@ import {addTodoReducer} from "@/features/AddTodo/model/addTodoSlice";
 import {$api} from "@/shared/api/api";
 import {AxiosInstance} from "axios";
 import {editTodoReducer} from "@/features/EditTodoById/model/editTodoSlice";
+import {loginReducer} from "@/features/LoginByEmail/model/loginSlice";
 
 export const createReduxStore = (initialState?: StateSchema) => {
     const rootReducer: ReducersMapObject<StateSchema> = {
         todos: todoReducer,
         newTodo: addTodoReducer,
         editTodo: editTodoReducer,
+        login: loginReducer,
     }
 
     return configureStore({

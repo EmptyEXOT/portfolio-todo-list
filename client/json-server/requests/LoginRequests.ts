@@ -2,7 +2,7 @@ import express = require('express');
 
 export interface LoginRequests extends express.Request {
     body: {
-        username: string,
+        email: string,
         password: string,
     }
 }

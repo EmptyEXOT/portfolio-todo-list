@@ -19,8 +19,7 @@ const todoSlice = createSlice({
         ids: [],
         entities: {}
     }),
-    reducers: {
-    },
+    reducers: {},
     extraReducers: (builder) => {
         builder
             .addCase(fetchAllTodosService.pending, (state, action) => {
@@ -33,7 +32,6 @@ const todoSlice = createSlice({
             })
             .addCase(fetchAllTodosService.rejected, (state, action) => {
                 state.isLoading = false;
-                //@ts-ignore
                 state.error = action.payload;
             })
     }

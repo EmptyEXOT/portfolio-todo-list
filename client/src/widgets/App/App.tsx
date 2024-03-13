@@ -25,6 +25,7 @@ const App: FC<AppProps> = (
     const dispatch = useDispatch<any>()
     const todos = useSelector(getTodos.selectAll)
     const isTodosLoading = useSelector((state: StateSchema) => state.todos.isLoading)
+    const todosError = useSelector((state: StateSchema) => state.todos.error);
 
     useEffect(() => {
         dispatch(fetchAllTodosService())
@@ -32,6 +33,10 @@ const App: FC<AppProps> = (
     }, []);
 
     const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+
+    if (todosError) {
+        return <div>{todosError.message}</div>
+    }
 
     return (
         isTodosLoading ? <p>loading...</p> : <ModalProvider setIsModalOpen={setIsModalOpen} isModalOpen={isModalOpen}>

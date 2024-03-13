@@ -12,7 +12,8 @@ export const addTodoService = createAsyncThunk<TodoModel, CreateTodoPayload, Thu
     'todo/add',
     async (data, thunkAPI) => {
         try {
-            const response = await thunkAPI.extra.api.post<TodoModel>('/todos', data)
+            const token = localStorage.getItem('token');
+            const response = await thunkAPI.extra.api.post<TodoModel>('/todos', data, {headers: {Authorization: `Bearer ${token}`}})
             if (!response.data) {
                 throw new Error('Login Error')
             } else {

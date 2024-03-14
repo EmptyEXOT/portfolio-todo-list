@@ -1,6 +1,6 @@
 import React from 'react';
 import classNames from "classnames";
-import {useNavigate} from "react-router-dom";
+import {Navigate, useLoaderData, useNavigate} from "react-router-dom";
 import Button, {ButtonVariant} from "@/shared/ui/Button/Button";
 import BackIcon from './assets/BackIcon.svg'
 import {Typo, TypoVariant} from "@/shared/ui/Typo/Typo";
@@ -8,6 +8,7 @@ import LoginForm from "@/features/LoginByEmail/ui/LoginForm";
 
 const LoginPage = () => {
     const navigate = useNavigate();
+
     return (
         <div className={classNames('flex md:max-h-screen overflow-hidden')}>
             <div className={classNames('hidden md:flex h-screen bg-amber-400 w-[50%] justify-center')}>

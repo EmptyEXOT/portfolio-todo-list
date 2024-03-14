@@ -8,6 +8,7 @@ import {AppPage} from "@/pages/AppPage";
 import {LoginPage} from "@/pages/LoginPage";
 import {privateRouteLoader} from "../router/loader/privateRouteLoader";
 import {withPrivate} from "../hocs/withPrivate/withPrivate";
+import {withRedirectIfLogin} from "@/shared/hocs/withRedirectIfAuth/withRedirectIfLogin";
 
 export const router = createBrowserRouter([
     {
@@ -53,11 +54,14 @@ export const router = createBrowserRouter([
     },
     {
         path: 'login/*',
-        // action: loginAction,
+        loader: privateRouteLoader,
         element:
+        withRedirectIfLogin(
             <Suspense fallback={'Loading Login page'}>
                 <LoginPage/>
             </Suspense>,
+            '/app'
+            )
     },
     {
         path: '*',

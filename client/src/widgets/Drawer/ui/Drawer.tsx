@@ -10,6 +10,9 @@ import {ModalProvider} from "@/shared/ui/Modal/ModalProvider";
 import AddTodo from "@/features/AddTodo/AddTodo";
 import cls from './Drawer.module.scss'
 import SignoutButton from "@/features/Signout/ui/SignoutButton";
+import Dropdown from '@/shared/ui/Dropdown/Dropdown';
+import {Menu} from "@/shared/ui/Menu/ui/Menu";
+import {useSelector} from "react-redux";
 
 interface DrawerProps {
     children?: ReactNode
@@ -24,6 +27,9 @@ export const Drawer: FC<DrawerProps> = (
 ) => {
     const [isDrawerOpen, setIsDrawerOpen] = useState<boolean>(true)
     const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+
+    const userEmail = localStorage.getItem('email');
+
     return (
         <ModalProvider setIsModalOpen={setIsModalOpen} isModalOpen={isModalOpen}>
             <Modal
@@ -57,7 +63,15 @@ export const Drawer: FC<DrawerProps> = (
                 isDrawerOpen ? 'w-[75vw] md:w-[30vw] px-2' : 'w-0 px-0'
             )}>
                 <div id={'controls'} className={classNames('flex justify-between items-center')}>
-                    <Typo.H3>Username</Typo.H3>
+                    <Menu
+                        top={10}
+                        anchor={<Typo.H3>{userEmail}</Typo.H3>}
+                        className={classNames(
+                            'bg-neutral-100 p-3 rounded border border-solid border-neutral-300',
+                            'w-[69vw] md:w-[21.5vw]'
+                        )}>
+                        <SignoutButton>SignOut</SignoutButton>
+                    </Menu>
                     <Button
                         modifiers={{circle: true}}
                         variant={ButtonVariant.Default}
@@ -71,14 +85,12 @@ export const Drawer: FC<DrawerProps> = (
                     <Button
                         modifiers={{circle: true}}
                         variant={ButtonVariant.Default}
-                        // onClick={() => dispatch(todoActions.addTask({created: '', description: 'new task', header: 'New tas Header', isFinished: false, deadline: ''}))}
                         onClick={() => setIsModalOpen(true)}
                         className={classNames('p-2')}
                     >
                         {<AddCircleIcon/>}
                     </Button>
                 </div>
-                <SignoutButton>SignOut</SignoutButton>
             </div>
         </ModalProvider>
     );

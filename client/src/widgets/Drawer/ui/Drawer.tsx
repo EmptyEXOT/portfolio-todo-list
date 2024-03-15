@@ -9,6 +9,7 @@ import {Modal} from "@/shared/ui/Modal/Modal";
 import {ModalProvider} from "@/shared/ui/Modal/ModalProvider";
 import AddTodo from "@/features/AddTodo/AddTodo";
 import cls from './Drawer.module.scss'
+import SignoutButton from "@/features/Signout/ui/SignoutButton";
 
 interface DrawerProps {
     children?: ReactNode
@@ -77,6 +78,7 @@ export const Drawer: FC<DrawerProps> = (
                         {<AddCircleIcon/>}
                     </Button>
                 </div>
+                <SignoutButton>SignOut</SignoutButton>
             </div>
         </ModalProvider>
     );

@@ -8,6 +8,7 @@ import {AddTodoRequest, DeleteTodoRequest, GetTodoRequest, UpdateTodoRequest} fr
 import {TodoSchema} from "./models/TodoSchema";
 import {UserSchema} from "./models/UserSchema";
 import {ValidateUserRequest} from "./requests/ValidateUserRequest";
+import {SignoutRequests} from "./requests/SignoutRequest";
 
 //TODO fix ts error for .create()
 //@ts-ignore
@@ -78,6 +79,21 @@ server.use((req: express.Request, res: express.Response, next: express.NextFunct
 
     next();
 });
+
+server.post('/signout', (req: SignoutRequests, res: express.Response) => {
+    const userInfo = req.body;
+    const db: DatabaseSchema = JSON.parse(
+        fs.readFileSync(path.resolve(__dirname, 'db.json'), {encoding: "utf-8"}),
+    );
+
+    const users: UserSchema[] = db.users;
+    const candidate = users.find(user => user.email === userInfo.email && String(user.id) === userInfo.token)
+    if (candidate) {
+        return res.json(`User with email ${candidate.email} signout`)
+    }
+
+    res.status(404).json(`User with such email doesn't exist`);
+})
 
 server.get('/todos', (req: GetTodoRequest, res: express.Response) => {
     try {

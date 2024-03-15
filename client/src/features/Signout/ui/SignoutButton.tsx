@@ -27,8 +27,9 @@ const SignoutButton: FC<SignoutButtonProps> = ({children, className}) => {
 
         return (
             <Button
-                className={classNames(className, '')}
-                variant={ButtonVariant.Alert}
+                className={classNames(className, 'p-2 w-full')}
+                modifiers={{rounded: true}}
+                variant={ButtonVariant.Default}
                 onClick={onSignOut}
             >
                 {children}

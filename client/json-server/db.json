@@ -46,6 +46,12 @@
       "username": "admin",
       "password": "123",
       "email": "alim"
+    },
+    {
+      "id": 2,
+      "username": "alim",
+      "password": "456",
+      "email": "alim@mail.ru"
     }
   ]
 }

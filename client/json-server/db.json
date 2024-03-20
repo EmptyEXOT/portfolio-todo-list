@@ -4,31 +4,55 @@
       "id": 1,
       "title": "json-server 1234",
       "description": "default description",
-      "author": "typicode"
+      "author": "admin@mail.ru"
     },
     {
       "id": 2,
       "title": "json-server 2",
       "description": "default description",
-      "author": "typicode"
+      "author": "admin@mail.ru"
     },
     {
       "id": 3,
       "title": "json-server 3",
       "description": "default description",
-      "author": "typicode"
+      "author": "alim@mail.ru"
     },
     {
       "id": 4,
       "title": "json-server 45",
       "description": "default description",
-      "author": "typicode"
+      "author": "admin@mail.ru"
     },
     {
       "id": 5,
       "title": "Task",
       "description": "task descr",
-      "author": "alim"
+      "author": "alim@mail.ru"
+    },
+    {
+      "id": 6,
+      "title": "iuregnreg",
+      "description": "gfwef",
+      "author": "alim@mail.ru"
+    },
+    {
+      "id": 7,
+      "title": "newTask",
+      "description": "task",
+      "author": "alim@mail.ru"
+    },
+    {
+      "id": 8,
+      "title": "adminTask",
+      "description": "task",
+      "author": "admin@mail.ru"
+    },
+    {
+      "id": 9,
+      "title": "User task",
+      "description": "descr2",
+      "author": "alim@mail.ru"
     }
   ],
   "comments": [
@@ -45,13 +69,15 @@
       "id": 1,
       "username": "admin",
       "password": "123",
-      "email": "alim"
+      "email": "admin@mail.ru",
+      "token": "abcdef1234"
     },
     {
       "id": 2,
       "username": "alim",
       "password": "456",
-      "email": "alim@mail.ru"
+      "email": "alim@mail.ru",
+      "token": "ghijkl5678"
     }
   ]
 }

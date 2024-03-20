@@ -14,9 +14,8 @@ interface LoginPayload {
 }
 
 interface LoginResponse {
-    id: number,
+    token: string,
     username: string,
-    password: string,
     email: string,
 }
 
@@ -28,7 +27,7 @@ export const loginService = createAsyncThunk<LoginResponse, LoginPayload, ThunkC
             if (!response.data) {
                 throw new Error('Login Error')
             } else {
-                localStorage.setItem('token', String(response.data.id))
+                localStorage.setItem('token', String(response.data.token))
                 localStorage.setItem('username', String(response.data.username))
                 localStorage.setItem('email', String(response.data.email))
                 userLoginInfo.navigate('/app')

@@ -41,7 +41,10 @@ const AddTodo: FC<AddTodoProps> = (
     }, [])
 
     const onAdd = useCallback(() => {
-        dispatch(addTodoService({title: newTodo.title, description: newTodo.description}))
+        dispatch(addTodoService({
+            title: newTodo.title,
+            description: newTodo.description,
+        }))
 
         dispatch(addTodoActions.reset())
         setIsModalOpen(false);
@@ -67,12 +70,16 @@ const AddTodo: FC<AddTodoProps> = (
                     variant={ButtonVariant.Success}
                     modifiers={{outline: true, rounded: true}}
                     className={classNames('p-2')}
-                    onClick={() => {onAdd()}}
+                    onClick={() => {
+                        onAdd()
+                    }}
                 >
                     <Typo.H4 variant={TypoVariant.Successful}>Add</Typo.H4>
                 </Button>
                 <Button
-                    onClick={() => {onReset()}}
+                    onClick={() => {
+                        onReset()
+                    }}
                     variant={ButtonVariant.Alert}
                     modifiers={{outline: true, rounded: true}}
                     className={classNames('p-2')}
